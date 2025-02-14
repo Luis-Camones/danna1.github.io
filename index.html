@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Script&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Corazón con Latidos</title>
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background: #dcdcdc;
+            font-family: "League Script", serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 300px;
+            height: 400px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            perspective: 1000px;
+            transition: box-shadow 0.5s ease-in-out;
+        }
+
+        .card:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+        }
+
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .front,
+        .back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            backface-visibility: hidden;
+            font-size: 24px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Estilo general para el contenedor del botón */
+        .audio-button-container {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+            padding: 10px;
+        }
+
+        /* Estilo para el botón */
+        .audio-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Contenedor de tarjetas */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            /* Espacio entre el botón y las tarjetas */
+        }
+
+        /* Tarjetas dentro del contenedor */
+        .card {
+            width: 300px;
+            margin: 15px;
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        
+
+        .front {
+            background: #ffcccc;
+        }
+
+        .back {
+            background: #ffcbcb8e;
+            transform: rotateY(180deg);
+            font-weight: bold;
+            font-size: 25px;
+            color: #2b2929;
+        }
+
+        .heart1 {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(56, 14, 14);
+            transform: rotate(-45deg);
+            animation: heartbeat 1.5s infinite, glow 3s infinite alternate;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+        }
+
+        .heart1::before,
+        .heart1::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: rgb(56, 14, 14);
+            ;
+            border-radius: 50%;
+            top: -50px;
+            left: 0;
+        }
+
+        .heart1::after {
+            left: 50px;
+            top: 0;
+        }
+
+        .heart2 {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(252, 234, 234);
+            transform: rotate(-45deg);
+            animation: heartbeat 1.5s infinite, glow 3s infinite alternate;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+        }
+
+        .heart2::before,
+        .heart2::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: rgb(252, 234, 234);
+            border-radius: 50%;
+            top: -50px;
+            left: 0;
+        }
+
+        .heart2::after {
+            left: 50px;
+            top: 0;
+        }
+
+        .heart3 {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(121, 6, 69);
+            transform: rotate(-45deg);
+            animation: heartbeat 1.5s infinite, glow 3s infinite alternate;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+        }
+
+        .heart3::before,
+        .heart3::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: rgb(121, 6, 69);
+            border-radius: 50%;
+            top: -50px;
+            left: 0;
+        }
+
+        .heart3::after {
+            left: 50px;
+            top: 0;
+        }
+
+        .heart4 {
+            width: 100px;
+            height: 100px;
+            background-color: #FF6F61;
+            transform: rotate(-45deg);
+            animation: heartbeat 1.5s infinite, glow 3s infinite alternate;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+        }
+
+        .heart4::before,
+        .heart4::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: #FF6F61;
+            border-radius: 50%;
+            top: -50px;
+            left: 0;
+        }
+
+        .heart4::after {
+            left: 50px;
+            top: 0;
+        }
+
+        .heart5 {
+            width: 100px;
+            height: 100px;
+            background-color: #9B4F59;
+            transform: rotate(-45deg);
+            animation: heartbeat 1.5s infinite, glow 3s infinite alternate;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+        }
+
+        .heart5::before,
+        .heart5::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: #9B4F59;
+            border-radius: 50%;
+            top: -50px;
+            left: 0;
+        }
+
+        .heart5::after {
+            left: 50px;
+            top: 0;
+        }
+
+        .heart6 {
+            width: 100px;
+            height: 100px;
+            background-color: #770000;
+            transform: rotate(-45deg);
+            animation: heartbeat 1.5s infinite, glow 3s infinite alternate;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+        }
+
+        .heart6::before,
+        .heart6::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: #770000;
+            border-radius: 50%;
+            top: -50px;
+            left: 0;
+        }
+
+        .heart6::after {
+            left: 50px;
+            top: 0;
+        }
+
+        .heart7 {
+            width: 100px;
+            height: 100px;
+            background-color: #C97C92;
+            transform: rotate(-45deg);
+            animation: heartbeat 1.5s infinite, glow 3s infinite alternate;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+        }
+
+        .heart7::before,
+        .heart7::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: #C97C92;
+            border-radius: 50%;
+            top: -50px;
+            left: 0;
+        }
+
+        .heart7::after {
+            left: 50px;
+            top: 0;
+        }
+
+        .heart8 {
+            width: 100px;
+            height: 100px;
+            background-color: #571f29;
+            transform: rotate(-45deg);
+            animation: heartbeat 1.5s infinite, glow 3s infinite alternate;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+        }
+
+        .heart8::before,
+        .heart8::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: #571f29;
+            border-radius: 50%;
+            top: -50px;
+            left: 0;
+        }
+
+        .heart8::after {
+            left: 50px;
+            top: 0;
+        }
+
+        /* Estilo para el contenedor del botón */
+        .audio-button-container {
+            position: absolute;
+            top: 50px;
+            /* Aumenta el valor si necesitas más espacio */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            text-align: center;
+        }
+
+
+
+        /* Estilo del botón */
+        .audio-button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #FF6F61;
+            /* Color vibrante */
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .audio-button:hover {
+            background-color: #FF4A36;
+            /* Color más intenso al pasar el mouse */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            transform: scale(1.1);
+            /* Agranda el botón */
+        }
+
+        .audio-button:focus {
+            outline: none;
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(-45deg);
+            }
+
+            50% {
+                transform: scale(1.2) rotate(-45deg);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 50px rgba(255, 0, 0, 0.89);
+            }
+
+            100% {
+                box-shadow: 0 0 60px rgba(255, 0, 0, 0.89);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Contenedor y botón de audio -->
+        <div class="audio-button-container">
+            <button class="audio-button" onclick="document.getElementById('audio').play()">Reproducir Audio</button>
+        </div>
+
+        <audio id="audio" src="my_way.mp3" loop></audio>
+
+        <div class="row justify-content-center g-4 card-container">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="front">
+                            <div class="heart1"> Iris</div>
+                        </div>
+                        <div class="back">
+                            Y cada noche antes de ir a dormir... te abrazo a la distancia y le pido a Dios que te cuide
+                            siempre.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="front">
+                            <div class="heart2"></div>
+                        </div>
+                        <div class="back">
+                            No fueron mis ojos los que te encontraron, fue mi alma la que te vio y mi corazón el que te
+                            eligió, y esto es eterno.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="front">
+                            <div class="heart3"></div>
+                        </div>
+                        <div class="back">
+                            Como te explico que eres la razon y el motivo por el cual sonrío cada que te pienso.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="front">
+                            <div class="heart4"></div>
+                        </div>
+                        <div class="back">
+                            Y cada noche antes de ir a dormir... te abrazo a la distancia y le pido a Dios que te cuide
+                            siempre.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="front">
+                            <div class="heart5"></div>
+                        </div>
+                        <div class="back">
+                            Solo Dios sabe cuanto anhelo pasar el resto de mi vida contigo, no importa el tiempo que
+                            pase.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="front">
+                            <div class="heart6"></div>
+                        </div>
+                        <div class="back">
+                            Por más lejos que estemos el uno del otro, siempre estaremos cerca, tú en mi corazón y yo en
+                            tus recuerdos.”
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="front">
+                            <div class="heart7"></div>
+                        </div>
+                        <div class="back">
+                            Eres la manera que tiene el mundo de decirme lo bonita que es la vida.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="front">
+                            <div class="heart8"></div>
+                        </div>
+                        <div class="back">
+                            ¿Acaso te gusta la geometría? Porque te veo perfecta desde todos los ángulos 😏. JAJAJA
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.getElementById('audio').volume = 0.1; // Ajusta el volumen al 50%
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
