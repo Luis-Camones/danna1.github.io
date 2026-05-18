@@ -63,7 +63,6 @@
             padding: 20px;
         }
 
-        /* Estilo general para el contenedor del botón */
         .audio-button-container {
             display: flex;
             justify-content: center;
@@ -72,7 +71,6 @@
             padding: 10px;
         }
 
-        /* Estilo para el botón */
         .audio-button {
             padding: 10px 20px;
             font-size: 16px;
@@ -83,16 +81,13 @@
             cursor: pointer;
         }
 
-        /* Contenedor de tarjetas */
         .card-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 20px;
-            /* Espacio entre el botón y las tarjetas */
         }
 
-        /* Tarjetas dentro del contenedor */
         .card {
             width: 300px;
             margin: 15px;
@@ -325,11 +320,9 @@
             top: 0;
         }
 
-        /* Estilo para el contenedor del botón */
         .audio-button-container {
             position: absolute;
             top: 50px;
-            /* Aumenta el valor si necesitas más espacio */
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
@@ -338,7 +331,6 @@
 
 
 
-        /* Estilo del botón */
         .audio-button {
             padding: 15px 30px;
             font-size: 18px;
@@ -354,10 +346,8 @@
 
         .audio-button:hover {
             background-color: #FF4A36;
-            /* Color más intenso al pasar el mouse */
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
             transform: scale(1.1);
-            /* Agranda el botón */
         }
 
         .audio-button:focus {
@@ -391,7 +381,6 @@
 <body>
 
     <div class="container">
-        <!-- Contenedor y botón de audio -->
         <div class="audio-button-container">
             <button class="audio-button" onclick="document.getElementById('audio').play()">Reproducir Audio</button>
         </div>
@@ -506,7 +495,7 @@
 
 
     <script>
-        document.getElementById('audio').volume = 0.1; // Ajusta el volumen al 50%
+        document.getElementById('audio').volume = 0.1;
     </script>
 
 
